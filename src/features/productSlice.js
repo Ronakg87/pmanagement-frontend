@@ -106,7 +106,7 @@ const productSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // ✅ Fetch Products
+      // Fetch Products
       .addCase(fetchProducts.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -120,7 +120,7 @@ const productSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ✅ Fetch Product By ID
+      // Fetch Product By ID
       .addCase(fetchProductById.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -136,7 +136,7 @@ const productSlice = createSlice({
         state.selectedProduct = null;
       })
 
-      // ✅ Create Product
+      // Create Product
       .addCase(createProduct.pending, (state) => {
         state.loading = true;
       })
@@ -152,7 +152,7 @@ const productSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ✅ Update Product
+      // Update Product
       .addCase(updateProduct.pending, (state) => {
         state.loading = true;
       })
@@ -172,7 +172,7 @@ const productSlice = createSlice({
         state.error = action.payload;
       })
 
-      // ✅ Delete Product
+      // Delete Product
       .addCase(deleteProduct.pending, (state) => {
         state.loading = true;
       })

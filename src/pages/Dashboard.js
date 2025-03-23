@@ -22,7 +22,7 @@ const Dashboard = () => {
   const handleCardClick = () => {
     navigate("/products"); // Redirects to the Products page
   };
-console.log(localStorage.getItem('role'));
+
   return (
     <AuthGuard>
     <div className="main-container">
@@ -30,7 +30,6 @@ console.log(localStorage.getItem('role'));
       <div className="content-container">
         
         <div className="header">
-          {/* <h2>{localStorage.getItem('role') === "admin" ? "Admin Dashboard" : "User Dashboard"}</h2> */}
           <h2>Dashboard</h2>
         </div>
         <div className="stats">

@@ -36,13 +36,6 @@ const Users = () => {
           <button
             onClick={goBack}
             className="back_btn"
-            // style={{
-            //   background: "none",
-            //   border: "none",
-            //   cursor: "pointer",
-            //   fontSize: "20px",
-            //   marginRight: "10px",
-            // }}
           >
             🔙
           </button>

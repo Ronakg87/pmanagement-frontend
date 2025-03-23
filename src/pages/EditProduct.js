@@ -80,10 +80,10 @@ const EditProduct = () => {
     label: user.name
   })) || [];
 
-  const preSelectedUsers = assignedTo.map((id) =>
+  const preSelectedUsers = assignedTo?.map((id) =>
     options.find((user) => user.value === id)
   );
-
+  
   // Handle selection
   const handleChange = (selected) => {
     const selectedValues = selected.map((item) => item.value);
@@ -132,22 +132,22 @@ const EditProduct = () => {
               )}
               <input type="file" className="input-textbox" onChange={handleFileChange} />
 
-              {usersLoading ? (
+              {localStorage.getItem('role') === "admin" && (
+              usersLoading ? (
                 <p>Loading users...</p>
               ) : (
                 <CMultiSelect
                 options={options.map((option) => ({
                     ...option,
-                    selected: preSelectedUsers.some((user) => user.value === option.value),
+                    selected: preSelectedUsers?.some((user) => user.value === option.value),
                   }))}
                   label="Assign To"
-                  text="Please select users"
                   search="global"
                   selectionType="tags"
                   onChange={handleChange}
                   value={preSelectedUsers} // Pre-select users
                 />
-              )}
+              ))}
 
               <button type="submit" className="submit-btn">Update Product</button>
             </form>

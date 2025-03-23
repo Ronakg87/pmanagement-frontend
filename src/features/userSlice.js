@@ -41,7 +41,6 @@ export const createUser = createAsyncThunk(
   "users/createUser",
   async (userData, { rejectWithValue }) => {
     try {
-      console.log(userData);
       const res = await axios.post(`${API_URL}/create-user`, userData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
@@ -53,7 +52,7 @@ export const createUser = createAsyncThunk(
   }
 );
 
-//  Create User
+//  Update User
 export const updateUser = createAsyncThunk(
   "users/updateUser",
   async ({ userId, name, email }, { rejectWithValue }) => {
@@ -70,22 +69,6 @@ export const updateUser = createAsyncThunk(
   }
 );
 
-// Delete User
-export const deleteUser = createAsyncThunk(
-  "users/deleteUser",
-  async (userId, { rejectWithValue }) => {
-    try {
-      await axios.delete(`${API_URL}/user/${userId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      // toast.success("User deleted successfully!");
-      return userId;
-    } catch (error) {
-      toast.error(error.response?.data || "Failed to delete user");
-      return rejectWithValue(error.response?.data || "Failed to delete user");
-    }
-  }
-);
 
 const userSlice = createSlice({
   name: "users",
@@ -109,12 +92,11 @@ const userSlice = createSlice({
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload?.message || "Failed to fetch users";
+        state.error = action.payload || "Failed to fetch users";
       })
 
       // Fetch User By ID
       .addCase(fetchUserById.fulfilled, (state, action) => {
-        // const { userId, data } = action.payload;
         state.userDetails = action.payload;  // Store user details in the state
       })
       .addCase(fetchUserById.rejected, (state, action) => {
@@ -137,20 +119,7 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Delete User
-      .addCase(deleteUser.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(deleteUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.users = state.users.filter((user) => user._id !== action.payload);
-      })
-      .addCase(deleteUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-
-      // ✅ Update User
+      // Update User
       .addCase(updateUser.pending, (state) => {
         state.loading = true;
         state.error = null;
