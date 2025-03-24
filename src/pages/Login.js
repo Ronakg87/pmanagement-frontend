@@ -41,8 +41,8 @@ const Login = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const result = await dispatch(loginUser(values));
-
-      if (result.payload) {
+      console.log(result);
+      if (result.type === "auth/loginUser/fulfilled") {
         toast.success("Logged in successfully!");
         navigate("/dashboard");
       } else {
